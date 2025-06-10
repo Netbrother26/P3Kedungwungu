@@ -1,0 +1,290 @@
+<?php
+session_start();
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit;
+}
+?>
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html>
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>PPP Kedungwungu - Admin</title>
+    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="apple-icon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <link rel="stylesheet" href="vendors/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="vendors/themify-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="vendors/selectFX/css/cs-skin-elastic.css">
+    
+
+
+    <link rel="stylesheet" href="assets/css/style.css">
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+	
+	<!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.bootstrap4.min.css">
+
+    <link rel="stylesheet" href="vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="vendors/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css">
+	
+       
+</head>
+
+<body>
+<script>
+    function loadPage(url, callback) {
+      fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          document.getElementById("content").innerHTML = html;
+          if (typeof callback === "function") callback();
+        })
+        .catch(err => console.error("Gagal load page:", err));
+    }
+ </script>
+
+  <!-- Ini panggil main.js dengan path yang BENAR -->
+  <script src="js/main.js" defer></script>
+
+     <!-- Left Panel -->
+
+    
+<!-- Left Panel -->
+
+    <aside id="left-panel" class="left-panel">
+        <nav class="navbar navbar-expand-sm navbar-default">
+
+            <div class="navbar-header">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="./"><img src="views/images/logo.png" alt="Logo"></a>
+                <a class="navbar-brand hidden" href="./"><img src="views/images/logo2.png" alt="Logo"></a>
+            </div>
+
+            <div id="main-menu" class="main-menu collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active">
+						
+                        <a href="#" id="Home">
+						  <i class="menu-icon fa fa-th-large"></i> Home
+						</a>
+                    </li>
+                   
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-home"></i>Ruko</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-home"></i><a href="#" id="StokRuko">Stok Ruko</a></li>
+                            <li><i class="fa fa-home"></i><a href="#">Stok Status</a></li>
+                            
+                        </ul>
+                    </li>
+                    
+
+                    <h3 class="menu-title">TRANSAKSI</h3><!-- /.menu-title -->
+					<li>
+                        <a href="#" id="TrxPemesanan"><i class="menu-icon fa fa-tasks"></i>Pemesanan </a>
+                    </li>
+					<li>
+                        <a href="#" id="TrxPenjualan"><i class="menu-icon fa fa-bar-chart"></i>Penjualan </a>
+                    </li>
+                    <li>
+                        <a href="#"> <i class="menu-icon ti-shopping-cart"></i>Pembelian</a>
+                    </li>
+					<li>
+                        <a href="#"> <i class="menu-icon ti-stats-up"></i>Kas Masuk</a>
+                    </li>
+					<li>
+                        <a href="#"> <i class="menu-icon ti-stats-down"></i>Kas Keluar</a>
+                    </li>
+					<li>
+                        <a href="#"> <i class="menu-icon ti-pencil-alt"></i>Jurnal Umum</a>
+                    </li>
+					<li>
+                        <a href="#"> <i class="menu-icon fa fa-credit-card"></i>Payroll</a>
+                    </li>
+                    
+                    
+                    <h3 class="menu-title">Laporan</h3><!-- /.menu-title -->
+                    <li>
+						<a href="#" id="menu-pembeli"><i class="menu-icon fa fa-users"></i>Data Pembeli</a>
+                    </li>
+					<li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-clipboard"></i>Penjualan</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-bar-chart"></i><a href="#">Penjualan</a></li>
+                            <li><i class="fa fa-id-badge"></i><a href="#">Invoice</a></li>
+                            
+                        </ul>
+                    </li>
+					<li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-file"></i>Pembelian</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-file-text"></i><a href="#">Purchase Order</a></li>
+                            <li><i class="ti-shopping-cart"></i><a href="#">Pembelian</a></li>
+                            
+                        </ul>
+                    </li>
+					
+					<li>
+                        <a href="#"> <i class="menu-icon fa fa-tags"></i>Data Asset</a>
+                    </li>
+					<li>
+                        <a href="#"> <i class="menu-icon fa fa-id-badge"></i>Data Hutang</a>
+                    </li>
+					<li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Laporan Keuangan</a>
+                        <ul class="sub-menu children dropdown-menu">
+							<li><i class="fa fa-tasks"></i><a href="#">Neraca Saldo</a></li>
+                            <li><i class="fa fa-money"></i><a href="#">Arus Kas</a></li>
+                            <li><i class="ti-bar-chart"></i><a href="#">Neraca</a></li>
+							<li><i class="ti-bar-chart-alt"></i><a href="#">Laba rugi</a></li>
+                            
+                        </ul>
+                    </li>
+					
+					<h3 class="menu-title">MASTER</h3><!-- /.menu-title -->
+                    <li>
+                        <a href="#"> <i class="menu-icon fa fa-users"></i>User</a>
+                    </li>
+					<li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-home"></i>Ruko</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-home"></i><a href="#">Type Ruko</a></li>
+                            <li><i class="fa fa-money"></i><a href="#">Harga</a></li>
+                            
+                        </ul>
+                    </li>
+					<li>
+                        <a href="#"> <i class="menu-icon fa fa-gears"></i>Setting</a>
+                    </li>
+					
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </nav>
+    </aside><!-- /#left-panel -->
+
+    <!-- Left Panel -->
+
+
+
+    <!-- Left Panel -->
+
+    <!-- Right Panel -->
+	<div id="right-panel" class="right-panel">
+<!-- Header-->
+        <header id="header" class="header">
+
+            <div class="header-menu">
+
+                <div class="col-sm-7">
+                    <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
+                    <div class="header-left">
+						<div class="page-header float-left">
+								<div class="page-title">
+									<h1>Revitalisasi Pasar <B>Kedungwungu</B></h1>
+								</div>
+						</div>
+						
+                        <button class="search-trigger"><i class="fa fa-search"></i></button>
+                        <div class="form-inline">
+                            <form class="search-form">
+                                <input class="form-control mr-sm-2" type="text" placeholder="Search ..." aria-label="Search">
+                                <button class="search-close" type="submit"><i class="fa fa-close"></i></button>
+                            </form>
+                        </div>
+						
+						   
+                    </div>
+                </div>
+
+                <div class="col-sm-5">
+                    <div class="user-area dropdown float-right">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img class="user-avatar rounded-circle"  src="views/images/admin.jpg" alt="User Avatar">
+                        </a>
+
+                        <div class="user-menu dropdown-menu">
+                            <a class="nav-link" href="#"><i class="fa fa-user"></i> My Profile</a>
+
+                            <a class="nav-link" href="#"><i class="fa fa-user"></i> Notifications <span class="count">13</span></a>
+
+                            <a class="nav-link" href="#"><i class="fa fa-cog"></i> Settings</a>
+
+                            <a class="nav-link" href="logout.php"><i class="fa fa-power-off"></i> Logout</a>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+
+        </header><!-- /header -->
+        <!-- Header-->
+	<div id="content">
+       
+		<!-- Konten akan dimuat di sini -->
+			
+
+	
+        </div> <!-- .content -->
+    </div><!-- /#right-panel -->
+	
+	
+	<script src="vendors/jquery/dist/jquery.min.js"></script>
+    <script src="vendors/popper.js/dist/umd/popper.min.js"></script>
+    <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="assets/js/main.js"></script>
+	
+	<!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
+
+    <!-- DataTables Buttons -->
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.bootstrap4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.colVis.min.js"></script>
+	    
+    <script src="assets/js/init-scripts/data-table/datatables-init.js"></script>
+	
+	<!-- menghitung jumlah data di dashboard -->
+	
+	
+    <!-- Right Panel -->
+	<script>
+	function loadPageWithScript(page, script, initFn) {
+		  loadPage(page, function () {
+			const s = document.createElement("script");
+			s.src = script;
+			s.onload = () => window[initFn]?.();
+			document.body.appendChild(s);
+		  });
+		}
+	</script>
+    
+
+</body>
+
+</html>
